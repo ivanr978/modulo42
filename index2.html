@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de dados</title>
+
+</head>
+    <body>
+        <h1>Juego de Dados</h1>
+        
+        <label for="apuesta">Apuesta:</label>
+        <input type="number" id="apuesta" name="apuesta" min="0" max="1000">
+        <br>
+        <label for="numeroElegido">Elige un número del dado (1-6):</label>
+        <input type="number" id="numeroElegido" name="numeroElegido" min="1" max="6">
+        <br>
+        <button onclick="resultado()">Lanzar Dado</button>
+        <br>
+        <label>Resultado dado:</label>
+        <input type ="number" id="resultado">
+        <br>
+        <button onclick="reiniciarJuego()">Reiniciar Juego</button>
+        <script src="./assets/Juegodedados.js"></script>
+    </body>
+    </html>
