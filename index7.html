@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Consultorio Médico</title>
+</head>
+<body>
+  <h1>Consultorio Médico</h1>
+
+  <form>
+    <label for="nombre">Nombre del paciente:</label>
+    <input type="text" id="nombre" name="nombre">
+    <button type="button" id="buscar-btn">Buscar</button>
+    <button type="button" id="todos-btn">Mostrar todos</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function Consultorio() {
+      this.pacientes = [];
+
+      this.agregarPaciente = function(paciente) {
+        this.pacientes.push(paciente);
+      }
+
+      this.buscarPaciente = function(nombre) {
+        for (var i = 0; i < this.pacientes.length; i++) {
+          if (this.pacientes[i].getNombre() === nombre) {
+            return this.pacientes[i];
+          }
+        }
+        return null;
+      }
+
+      this.mostrarTodosPacientes = function() {
+        var resultado = "";
+        for (var i = 0; i < this.pacientes.length; i++) {
+          resultado += "<p>Nombre: " + this.pacientes[i].getNombre() + "</p>";
+          resultado += "<p>Edad: " + this.pacientes[i].getEdad() + "</p>";
+          resultado += "<p>RUT: " + this.pacientes[i].getRut() + "</p>";
+          resultado += "<p>Diagnóstico: " + this.pacientes[i].getDiagnostico() + "</p>";
+          resultado += "<hr>";
+        }
+        document.getElementById("resultado").innerHTML = resultado;
+      }
+    }
+
+    function Paciente(nombre, edad, rut, diagnostico) {
+      var _nombre = nombre;
+      var _edad = edad;
+      var _rut = rut;
+      var _diagnostico = diagnostico;
+
+      this.getNombre = function() {
+        return _nombre;
+      }
+
+      this.getEdad = function() {
+        return _edad;
+      }
+
+      this.getRut = function() {
+        return _rut;
+      }
+
+      this.getDiagnostico = function() {
+        return _diagnostico;
+      }
+    }
+
+    // Ejemplo de uso
+    var consultorio = new Consultorio();
+
+    var paciente1 = new Paciente("Juan", 30, "12345678-9", "Gripe");
+    var paciente2 = new Paciente("María", 25, "98765432-1", "Fiebre");
+
+    consultorio.agregarPaciente(paciente1);
+    consultorio.agregarPaciente(paciente2);
+
+    document.getElementById("buscar-btn").addEventListener("click", function() {
+      var nombre = document.getElementById("nombre").value;
+      var pacienteEncontrado = consultorio.buscarPaciente(nombre);
+      if (pacienteEncontrado !== null) {
+        var resultado = "<p>Nombre: " + pacienteEncontrado.getNombre() + "</p>";
+        resultado += "<p>Edad: " + pacienteEncontrado.getEdad() + "</p>";
+        resultado += "<p>RUT: " + pacienteEncontrado.getRut() + "</p>";
+resultado += "<p>Diagnóstico: " + pacienteEncontrado.getDiagnostico() + "</p>";
+document.getElementById("resultado").innerHTML = resultado;
+} else {
+document.getElementById("resultado").innerHTML = "<p>Paciente no encontrado</p>";
+}
+});
+document.getElementById("todos-btn").addEventListener("click", function() {
+  consultorio.mostrarTodosPacientes();
+});
+</script>
+</body>
+</html>
